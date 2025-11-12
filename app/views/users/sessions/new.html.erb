@@ -1,6 +1,7 @@
 <div class="min-h-screen flex flex-col md:flex-row overflow-hidden">
-  <!-- 🔶 Lado superior (en móvil) / izquierdo (en desktop): marca + ilustración -->
-  <div class="w-full md:w-1/2 bg-[#FF8C00] flex flex-col items-center justify-center text-white p-8 sm:p-10 relative overflow-hidden transform opacity-0 -translate-y-5 md:-translate-x-5 animate-[fadeInLeft_0.8s_ease-out_forwards]">
+  <!-- 🔶 Lado superior (móvil) / izquierdo (desktop): marca + ilustración -->
+  <div class="w-full md:w-1/2 bg-[#FF8C00] flex flex-col items-center justify-center text-white p-8 sm:p-10 relative overflow-hidden
+              transform opacity-0 translate-y-[-20px] md:translate-x-[-20px] animate-[fadeInLeft_0.8s_ease-out_forwards]">
     <div class="z-10 text-center space-y-3 sm:space-y-4">
       <h1 class="text-3xl sm:text-4xl font-bold tracking-wide">ERP+ Clientes</h1>
       <p class="text-base sm:text-lg opacity-90">Accede a tu cuenta y gestiona fácilmente</p>
@@ -12,8 +13,9 @@
     </div>
   </div>
 
-  <!-- ⚪ Lado inferior (en móvil) / derecho (en desktop): formulario -->
-  <div class="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-8 md:p-10 transform opacity-0 translate-y-5 md:translate-x-5 animate-[fadeInRight_0.8s_ease-out_forwards]">
+  <!-- ⚪ Lado inferior (móvil) / derecho (desktop): formulario -->
+  <div class="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-8 md:p-10
+              transform opacity-0 translate-y-[20px] md:translate-x-[20px] animate-[fadeInRight_0.8s_ease-out_forwards]">
     <div class="w-full max-w-md space-y-6 sm:space-y-8">
       <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 text-center">Iniciar sesión</h2>
 
@@ -37,11 +39,13 @@
                 class: "w-full border border-gray-300 rounded-lg px-3 py-2 sm:py-2.5 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none transition duration-200" %>
         </div>
 
-        <!-- Recordarme -->
-        <div class="flex items-center">
-          <%= f.check_box :remember_me, class: "h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded cursor-pointer" %>
-          <%= f.label :remember_me, "Recordarme", class: "ml-2 text-sm text-gray-700 cursor-pointer" %>
-        </div>
+        <% if devise_mapping.rememberable? %>
+          <!-- Recordarme -->
+          <div class="flex items-center">
+            <%= f.check_box :remember_me, class: "h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded cursor-pointer" %>
+            <%= f.label :remember_me, "Recordarme", class: "ml-2 text-sm text-gray-700 cursor-pointer" %>
+          </div>
+        <% end %>
 
         <!-- Botón -->
         <div>
@@ -61,49 +65,24 @@
 <!-- 🎬 Animaciones personalizadas -->
 <style>
 @keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-/* 🧩 Mejora para móviles: suavisar la entrada vertical */
+/* Animación vertical en móviles */
 @media (max-width: 767px) {
   @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 </style>

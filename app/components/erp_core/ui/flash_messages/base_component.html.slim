@@ -1,0 +1,11 @@
+div data-controller="erp-core--flash" class="fixed top-5 right-5 z-50 space-y-3 flex flex-col items-end"
+  / Mensajes flash
+  - @flash.each do |type, message|
+    div data-erp-core--flash-target="message" class="max-w-xs px-4 py-3 rounded-2xl shadow-lg #{flash_classes(type)} transform translate-x-full opacity-0 transition-all duration-500 ease-out"
+      p.font-medium.text-sm = message
+
+  / Errores de formulario
+  - if @resource&.errors&.any?
+    - @resource.errors.full_messages.each do |message|
+      div data-erp-core--flash-target="message" class="max-w-xs px-4 py-3 rounded-2xl shadow-lg bg-red-100 border border-red-400 text-red-700 transform translate-x-full opacity-0 transition-all duration-500 ease-out"
+        p.font-medium.text-sm = message

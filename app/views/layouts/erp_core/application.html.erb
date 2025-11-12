@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Erp core</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -13,12 +14,8 @@
 
 </head>
 <body class="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
-  
-<% flash.each do |key, message| %>
-  <div class="flash <%= key %>">
-    <%= message %>
-  </div>
-<% end %>
+
+<%= render ErpCore::Ui::FlashMessages::BaseComponent.new(flash: flash, resource: defined?(resource) ? resource : nil) %>
 
 <%= yield %>
 
