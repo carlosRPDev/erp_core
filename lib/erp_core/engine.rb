@@ -19,7 +19,6 @@ module ErpCore
     # Configuración de generators
     config.generators do |g|
       g.template_engine :slim
-      g.test_framework  :test_unit, fixture: false
       g.view_component true
     end
   end
