@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      erp_core/user: "Usuario"
+    attributes:
+      erp_core/user:
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+
+  errors:
+    messages:
+      blank: "no puede estar en blanco"
+      confirmation: "no coincide con %{attribute}"
+      too_short: "es demasiado corto (mínimo %{count} caracteres)"
