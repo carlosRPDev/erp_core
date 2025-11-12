@@ -3,9 +3,6 @@ ErpCore::Engine.routes.draw do
              class_name: "ErpCore::User",
              module: :devise,
              path: "",
-             path_names: {
-               sign_in: "login",
-               sign_out: "logout",
-               registration: "register"
-             }
+             path_names: { sign_in: "login", sign_out: "logout" },
+             controllers: { sessions: "erp_core/users/sessions" }
 end
