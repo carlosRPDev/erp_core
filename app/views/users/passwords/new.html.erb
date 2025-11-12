@@ -1,16 +1,81 @@
-<h2>Forgot your password?</h2>
+<div data-controller="erp-core--support-modal" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md space-y-8">
+    <!-- Título y descripción -->
+    <div class="text-center space-y-2">
+      <h2 class="text-3xl font-semibold text-gray-800">Recupera tu acceso</h2>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Ingresa el correo electrónico asociado a tu cuenta de <strong>ERP+ Clientes</strong> 
+        y te enviaremos un enlace para restablecer tu contraseña.
+      </p>
+      <p class="text-gray-500 text-xs">
+        Si no recuerdas con qué correo te registraste o aún no puedes acceder, 
+        <button type="button"
+          data-action="erp-core--support-modal#open"
+          class="text-orange-500 hover:text-orange-600 font-medium underline transition-colors duration-200">
+          contacta a soporte técnico
+        </button>.
+      </p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <!-- Formulario -->
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-5" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <!-- Campo de correo -->
+      <div>
+        <%= f.label :email, "Correo electrónico", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none transition duration-200" %>
+      </div>
+
+      <!-- Botón enviar -->
+      <div>
+        <%= f.submit "Enviar instrucciones",
+              class: "w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 active:scale-[0.98]" %>
+      </div>
+    <% end %>
+
+    <!-- Enlaces secundarios -->
+    <div class="text-center text-sm text-gray-600">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <!-- 🌟 Modal de soporte -->
+  <div 
+    data-erp-core--support-modal-target="overlay" 
+    class="hidden fixed inset-0 bg-[#FF8C00]/40 backdrop-blur-md flex items-center justify-center z-50 transition-all duration-300"
+  >
+    <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center relative transform transition-all duration-300 scale-95 opacity-0"
+        data-erp-core--support-modal-target="modal">
+      
+      <!-- Botón de cierre -->
+      <button 
+        data-action="click->erp-core--support-modal#close"
+        class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+        ✕
+      </button>
 
-<%= render "users/shared/links" %>
+      <!-- Contenido -->
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">Soporte Técnico</h3>
+      <p class="text-sm text-gray-600 mb-4">
+        Si necesitas ayuda para recuperar tu cuenta, puedes escribirnos a 
+        <a href="mailto:soporte@erpclientes.com" class="text-orange-500 hover:text-orange-600 font-medium underline">
+          soporte@erpclientes.com
+        </a>
+        o contáctanos vía WhatsApp al 
+        <a href="https://wa.me/573001234567" target="_blank" class="text-orange-500 hover:text-orange-600 font-medium underline">
+          +57 300 123 4567
+        </a>.
+      </p>
+
+      <button 
+        data-action="click->erp-core--support-modal#close"
+        class="mt-3 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
