@@ -1,0 +1,74 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    title Confirmación de cuenta - ERP Plus Clientes
+    style
+      |
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #f9fafb;
+          color: #333;
+          padding: 20px;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: #ffffff;
+          padding: 25px 30px;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        h1 {
+          font-size: 22px;
+          font-weight: 600;
+          color: #111827;
+        }
+        p {
+          line-height: 1.6;
+          font-size: 14px;
+        }
+        .button {
+          display: inline-block;
+          margin-top: 20px;
+          background-color: #f97316;
+          color: #ffffff !important;
+          padding: 12px 20px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 600;
+        }
+        .footer {
+          margin-top: 25px;
+          font-size: 12px;
+          color: #6b7280;
+        }
+
+  body
+    .container
+      h1 Bienvenido(a) a ERP Plus Clientes
+
+      p
+        | Estimado(a)
+        = " #{@email},"
+
+      p
+        | Gracias por registrarse en
+        strong  ERP Plus Clientes
+        | . Para activar su cuenta y comenzar a utilizar la plataforma, por favor confirme su correo electrónico.
+
+      p Para completar el proceso, haga clic en el siguiente botón:
+
+      / 🔗 Enlace de confirmación
+      = link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token), class: "button"
+
+      p
+        | Si usted no solicitó la creación de esta cuenta, puede ignorar este mensaje. Su acceso no será activado hasta realizar la confirmación.
+
+      .footer
+        p Agradecemos su confianza en ERP Plus Clientes.
+        p
+          | Atentamente,
+          br
+          | Equipo ERP Plus Clientes – Soluciones empresariales para un crecimiento inteligente.
