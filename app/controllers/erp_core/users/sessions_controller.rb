@@ -3,8 +3,6 @@ module ErpCore
     class SessionsController < Devise::SessionsController
       layout "erp_core/application"  # Tu layout con csrf_meta_tags
 
-      skip_before_action :verify_authenticity_token, only: [ :new, :create ], if: -> { request.format.html? }
-
       protected
 
       # Redirige al dashboard de erp_user después del login
