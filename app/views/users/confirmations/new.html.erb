@@ -1,16 +1,47 @@
-<h2>Resend confirmation instructions</h2>
+<div data-controller="erp-core--support-modal" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md space-y-8">
+    <!-- Título y descripción -->
+    <div class="text-center space-y-2">
+      <h2 class="text-3xl font-semibold text-gray-800">Reenviar correo de confirmación</h2>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Ingresa el correo electrónico asociado a tu cuenta de <strong>ERP+ Clientes</strong> 
+        y te enviaremos un enlace para confirmar tu cuenta y activar tu acceso.
+      </p>
+      <p class="text-gray-500 text-xs">
+        Si no recuerdas con qué correo te registraste o aún no puedes acceder, 
+        <button type="button"
+          data-action="click->erp-core--support-modal#open"
+          class="text-orange-500 hover:text-orange-600 font-medium underline transition-colors duration-200 cursor-pointer">
+          contacta a soporte técnico
+        </button>.
+      </p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <!-- Formulario -->
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "space-y-5" }) do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <!-- Campo de correo -->
+      <div>
+        <%= f.label :email, "Correo electrónico", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+              class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none transition duration-200" %>
+      </div>
+
+      <!-- Botón enviar -->
+      <div>
+        <%= f.submit "Reenviar instrucciones",
+              class: "w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 active:scale-[0.98]" %>
+      </div>
+    <% end %>
+
+    <!-- Enlaces secundarios -->
+    <div class="text-center text-sm text-gray-600">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= render ErpCore::Ui::Modal::Recovery::BaseComponent.new %>
+</div>
