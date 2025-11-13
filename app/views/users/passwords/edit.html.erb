@@ -1,25 +1,84 @@
-<h2>Change your password</h2>
+<div class="min-h-screen flex flex-col md:flex-row overflow-hidden">
+  <!-- 🔶 Lado superior (móvil) / izquierdo (desktop): marca + ilustración -->
+  <div class="w-full md:w-1/2 bg-[#FF8C00] flex flex-col items-center justify-center text-white p-8 sm:p-10 relative overflow-hidden
+              transform opacity-0 translate-y-[-20px] md:translate-x-[-20px] animate-[fadeInLeft_0.8s_ease-out_forwards]">
+    <div class="z-10 text-center space-y-3 sm:space-y-4">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-wide">ERP+ Clientes</h1>
+      <p class="text-base sm:text-lg opacity-90">Cambia tu contraseña de manera segura</p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+    <!-- Imagen decorativa -->
+    <div class="absolute inset-0 opacity-20">
+      <%= image_tag "erp_core/login_illustration.jpg", class: "w-full h-full object-cover" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  <!-- ⚪ Lado inferior (móvil) / derecho (desktop): formulario -->
+  <div class="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-8 md:p-10
+              transform opacity-0 translate-y-[20px] md:translate-x-[20px] animate-[fadeInRight_0.8s_ease-out_forwards]">
+    <div class="w-full max-w-md space-y-6 sm:space-y-8">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 text-center">Cambiar contraseña</h2>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-5 sm:space-y-6" }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
 
-<%= render "users/shared/links" %>
+        <!-- Nueva contraseña -->
+        <div>
+          <%= f.label :password, "Nueva contraseña", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <% if @minimum_password_length %>
+            <em class="text-xs text-gray-500">(<%= @minimum_password_length %> caracteres mínimo)</em>
+          <% end %>
+          <%= f.password_field :password,
+                autofocus: true,
+                autocomplete: "new-password",
+                class: "w-full border border-gray-300 rounded-lg px-3 py-2 sm:py-2.5 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none transition duration-200" %>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div>
+          <%= f.label :password_confirmation, "Confirmar nueva contraseña", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= f.password_field :password_confirmation,
+                autocomplete: "new-password",
+                class: "w-full border border-gray-300 rounded-lg px-3 py-2 sm:py-2.5 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none transition duration-200" %>
+        </div>
+
+        <!-- Botón -->
+        <div>
+          <%= f.submit "Cambiar mi contraseña",
+                class: "w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 active:scale-[0.98]" %>
+        </div>
+      <% end %>
+
+      <!-- Enlaces secundarios -->
+      <div class="text-center text-sm text-gray-600">
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🎬 Animaciones personalizadas -->
+<style>
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Animación vertical en móviles */
+@media (max-width: 767px) {
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+</style>
